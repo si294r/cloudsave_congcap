@@ -70,8 +70,6 @@ switch ($service) {
 //        validate_get();
 //        break;
     case 'time' :
-        validate_get();
-        break;
     case 'list' :
     case 'save' :
         validate_post();
