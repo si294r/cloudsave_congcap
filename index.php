@@ -69,6 +69,9 @@ switch ($service) {
 //    case 'leaderboard' :
 //        validate_get();
 //        break;
+    case 'time' :
+        validate_get();
+        break;
     case 'list' :
     case 'save' :
         validate_post();
