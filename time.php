@@ -1,3 +1,3 @@
 <?php
 
-return array("time" => date('Y-m-d H:i:s'));
+return array("time" => date_timestamp_get(date_create()));
