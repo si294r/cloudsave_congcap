@@ -21,7 +21,7 @@ function validate_post()
     global $headers;
     
     if ($_SERVER["REQUEST_METHOD"] != 'POST') {
-        show_error(405, "405 Method Not Allowed", "Invalid Method");
+        show_error(405, "405 Method Not Allowed", "Invalid Method " + $_SERVER["REQUEST_METHOD"]);
     }
     if (!isset($headers['Content-Type']) || strpos($headers['Content-Type'], 'application/json')  !== 0) {
         show_error(400, "400 Bad Request", "Invalid Content Type");
