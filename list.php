@@ -17,6 +17,7 @@ $sql1 = "
     FROM cloudsave 
     WHERE document_id = :document_id
     ORDER BY last_update DESC
+    LIMIT 5
 ";
 $statement1 = $connection->prepare($sql1);
 $statement1->bindParam(":document_id", $data['document_id']);
