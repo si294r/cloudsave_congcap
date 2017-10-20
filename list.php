@@ -32,7 +32,7 @@ $list = $statement1->fetchAll(PDO::FETCH_ASSOC);
 
 $data['list'] = $list;
 
-if (/*count($list) == 0 && */isset($json->list_s3)) {
+if (count($list) == 0 /*&& isset($json->list_s3) */) {
     
     $clientS3 = S3Client::factory(array(
         'credentials' => array(
