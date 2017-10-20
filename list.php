@@ -44,15 +44,15 @@ if (/*count($list) == 0 && */isset($json->list_s3)) {
     $folder = $IS_DEVELOPMENT ? "dev" : "live"; 
     
     $result = $clientS3->listObjectVersions([
-    'Bucket' => 'alegrium-www', // REQUIRED
-//    'Delimiter' => '<string>',
-//    'EncodingType' => 'url',
-//    'KeyMarker' => '<string>',
-    'MaxKeys' => 10,
-    'Prefix' => 'conglomerate/cloudsave/'.$folder.'/'.$data['document_id'],
-//    'VersionIdMarker' => '<string>',
+        'Bucket' => 'alegrium-www', // REQUIRED
+//        'Delimiter' => '<string>',
+//        'EncodingType' => 'url',
+//        'KeyMarker' => '<string>',
+        'MaxKeys' => 10,
+        'Prefix' => 'conglomerate/cloudsave/'.$folder.'/'.$data['document_id'],
+//        'VersionIdMarker' => '<string>',
     ]);
-    var_dump($result);
+    var_dump($result->data->Versions);
     $data['list_s3'] = $result;
 }
 
