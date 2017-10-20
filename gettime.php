@@ -1,6 +1,6 @@
 <?php
 
-$iservice = $IS_DEVELOPMENT == true ? "igettime-dev".$BUILD_TYPE : "igettime";
+//$iservice = $IS_DEVELOPMENT == true ? "igettime-dev".$BUILD_TYPE : "igettime";
 
 //$result = file_get_contents('http://alegrium5.alegrium.com/congcap/cloudsave/?'.$iservice, null, stream_context_create(
 //        array(
