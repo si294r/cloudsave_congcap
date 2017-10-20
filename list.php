@@ -54,7 +54,7 @@ if (/*count($list) == 0 && */isset($json->list_s3)) {
     ]);
     
     if (isset($result['Versions'][0])) {
-        $data['list_s3'] = array(array(
+        $data['list'] = array(array(
             "cloudsave_id" => "0",
             "document_id" => $data['document_id'],
             "version_id" => $result['Versions'][0]['VersionId'], 
@@ -62,8 +62,6 @@ if (/*count($list) == 0 && */isset($json->list_s3)) {
             "last_update" => gmdate('Y-m-d H:i:s')
         ));
     }
-//    var_dump($result['Versions'][0]);
-//    $data['list_s3'] = $result;
 }
 
 //header('Content-Type: application/json');
