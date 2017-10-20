@@ -2,6 +2,12 @@
 
 include("config.php");
 
+require '/var/www/vendor/autoload.php';
+include '/var/www/redshift-config2.php';
+
+use Aws\S3\S3Client;
+
+
 //$input = file_get_contents("php://input");
 $json = json_decode($input);
 
@@ -25,6 +31,27 @@ $statement1->execute();
 $list = $statement1->fetchAll(PDO::FETCH_ASSOC);
 
 $data['list'] = $list;
+
+if (count($list) == 0 && isset($json->list_s3)) {
+    
+    $clientS3 = S3Client::factory(array(
+        'credentials' => array(
+            'key' => $aws_access_key_id,
+            'secret' => $aws_secret_access_key
+        )
+    ));
+    
+    $result = $clientS3->listObjectVersions([
+    'Bucket' => 'alegrium-www', // REQUIRED
+//    'Delimiter' => '<string>',
+//    'EncodingType' => 'url',
+//    'KeyMarker' => '<string>',
+    'MaxKeys' => 10,
+    'Prefix' => 'conglomerate/cloudsave/'.$data['document_id'],
+//    'VersionIdMarker' => '<string>',
+]);
+    $data['list_s3'] = $result;
+}
 
 //header('Content-Type: application/json');
 //echo json_encode($data);   
