@@ -52,7 +52,7 @@ if (/*count($list) == 0 && */isset($json->list_s3)) {
         'Prefix' => 'conglomerate/cloudsave/'.$folder.'/'.$data['document_id'],
 //        'VersionIdMarker' => '<string>',
     ]);
-    var_dump($result->data->Versions);
+    var_dump($result['Versions']);
     $data['list_s3'] = $result;
 }
 
