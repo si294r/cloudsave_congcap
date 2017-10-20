@@ -62,8 +62,8 @@ if (/*count($list) == 0 && */isset($json->list_s3)) {
             "last_update" => gmdate('Y-m-d H:i:s')
         );
     }
-//    var_dump();
-    $data['list_s3'] = $result;
+//    var_dump($result['Versions'][0]);
+//    $data['list_s3'] = $result;
 }
 
 //header('Content-Type: application/json');
