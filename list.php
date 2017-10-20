@@ -41,13 +41,15 @@ if (count($list) == 0 && isset($json->list_s3)) {
         )
     ));
     
+    $folder = $IS_DEVELOPMENT ? "dev" : "live"; 
+    
     $result = $clientS3->listObjectVersions([
     'Bucket' => 'alegrium-www', // REQUIRED
 //    'Delimiter' => '<string>',
 //    'EncodingType' => 'url',
 //    'KeyMarker' => '<string>',
     'MaxKeys' => 10,
-    'Prefix' => 'conglomerate/cloudsave/'.$data['document_id'],
+    'Prefix' => 'conglomerate/cloudsave/'.$folder.'/'.$data['document_id'],
 //    'VersionIdMarker' => '<string>',
     ]);
     var_dump($result);
