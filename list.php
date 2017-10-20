@@ -49,7 +49,8 @@ if (count($list) == 0 && isset($json->list_s3)) {
     'MaxKeys' => 10,
     'Prefix' => 'conglomerate/cloudsave/'.$data['document_id'],
 //    'VersionIdMarker' => '<string>',
-]);
+    ]);
+    var_dump($result);
     $data['list_s3'] = $result;
 }
 
