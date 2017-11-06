@@ -34,11 +34,13 @@ $data['list'] = $list;
 
 if (count($list) == 0 /*&& isset($json->list_s3) */) {
     
-    $clientS3 = S3Client::factory(array(
+    $clientS3 = new S3Client(array(
         'credentials' => array(
             'key' => $aws_access_key_id,
             'secret' => $aws_secret_access_key
-        )
+        ),
+        "region" => "us-east-1",
+        "version" => "2006-03-01"
     ));
     
     $folder = $IS_DEVELOPMENT ? "dev" : "live"; 
