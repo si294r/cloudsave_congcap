@@ -3,6 +3,7 @@
 $start_time = microtime(true);
 
 $IS_DEVELOPMENT = FALSE;
+$BUILD_TYPE = 0;
 require 'token.php';
 
 //show_error(503, "503 Service Unavailable", "We are currently under maintenance.");
@@ -21,7 +22,7 @@ function validate_post()
     global $headers;
     
     if ($_SERVER["REQUEST_METHOD"] != 'POST') {
-        show_error(405, "405 Method Not Allowed", "Invalid Method " . $_SERVER["REQUEST_METHOD"]);
+        show_error(405, "405 Method Not Allowed", "Invalid Method");
     }
     if (!isset($headers['Content-Type']) || strpos($headers['Content-Type'], 'application/json')  !== 0) {
         show_error(400, "400 Bad Request", "Invalid Content Type");
@@ -58,27 +59,23 @@ $current_world = isset($params[1]) && is_numeric($params[1]) ? $params[1]: "1";
 
 // if service suffix is -dev then mark as DEVELOPMENT
 if (strpos($service, "-dev")) {
-    $service = str_replace("-dev", "", $service);
+    $arr_service = explode("-dev", $service);
+    $service = $arr_service[0];
+    if (isset($arr_service[1]) && is_numeric($arr_service[1])) {
+        $BUILD_TYPE = intval($arr_service[1]);
+    }
+//    $service = str_replace("-dev", "", $service);
     $IS_DEVELOPMENT = true;
 }
 
 //var_dump($params);
 
-// validate service ...
-switch ($service) {
-//    case 'leaderboard' :
-//        validate_get();
-//        break;
-    case 'igettime' :
-    case 'gettime' :
-    case 'time' :
-    case 'list' :
-    case 'save' :
-        validate_post();
-        $input = file_get_contents("php://input");
-        break;
-    default :
-        show_error(503, "503 Service Unavailable", "Invalid Service");
+// new validate service ...
+if (is_file($service . ".php")) {
+    validate_post();
+    $input = file_get_contents("php://input");
+} else {
+    show_error(503, "503 Service Unavailable", "Invalid Service");
 }
 
 // valid service goes here ... then try 'execute service' ...
